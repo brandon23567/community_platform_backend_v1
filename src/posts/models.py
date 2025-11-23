@@ -17,3 +17,4 @@ class CommunityPostModel(Base):
     
     user = relationship("UserModel", back_populates="user_community_posts")
     community = relationship("CommunityModel", back_populates="community_posts")
+    community_post_comments = relationship("CommunityPostCommentModel", back_populates="community_post")
