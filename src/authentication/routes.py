@@ -14,7 +14,6 @@ router = APIRouter(
     tags=["Authentication"]
 )
 
-
 @router.post("/signup", status_code=status.HTTP_201_CREATED, response_model=DisplayUserSchema)
 def signup_user_route(
     db: Session = Depends(get_db),
