@@ -16,6 +16,7 @@ class CommunityModel(Base):
     
     user = relationship("UserModel", back_populates="communities")
     joined_communities = relationship("JoinedCommunitiesModel", back_populates="community")
+    community_posts = relationship("CommunityPostModel", back_populates="community")
     
     
 class JoinedCommunitiesModel(Base):

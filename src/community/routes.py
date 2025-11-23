@@ -38,8 +38,7 @@ def create_new_community_route(
         name=name,
         description=description,
         community_header_image=community_header_image
-    )
-    
+    )  
 
 @router.get("/", status_code=status.HTTP_200_OK)
 def get_all_communities_route(

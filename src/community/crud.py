@@ -249,3 +249,4 @@ def get_user_joined_communities(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"There was an error trying to get the users joined communities: {str(e)}"
         )
+        
