@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 
-@router.post("/new", status_code=status.HTTP_201_CREATED)
+@router.post("/new", status_code=status.HTTP_201_CREATED, response_model=DisplayCommunitySchema)
 def create_new_community_route(
     db: Session = Depends(get_db),
     name: str = Form(..., description="name of community"),
@@ -40,7 +40,7 @@ def create_new_community_route(
         community_header_image=community_header_image
     )  
 
-@router.get("/", status_code=status.HTTP_200_OK)
+@router.get("/", status_code=status.HTTP_200_OK, response_model=list[DisplayCommunitySchema])
 def get_all_communities_route(
     db: Session = Depends(get_db),
     current_user_token: str = Depends(oauth)
@@ -56,7 +56,7 @@ def get_all_communities_route(
     return get_all_communities_created(db=db)
 
 
-@router.post("/{community_id}/join", status_code=status.HTTP_201_CREATED)
+@router.post("/{community_id}/join", status_code=status.HTTP_201_CREATED, response_model=DisplayCommunitySchema)
 def join_community_route(
     community_id: str,
     db: Session = Depends(get_db),
@@ -79,7 +79,7 @@ def join_community_route(
     )
     
 
-@router.post("/{community_id}/leave", status_code=status.HTTP_200_OK)
+@router.post("/{community_id}/leave", status_code=status.HTTP_200_OK, response_model=DisplayCommunitySchema)
 def leave_community_route(
     community_id: str,
     db: Session = Depends(get_db),
@@ -125,7 +125,7 @@ def delete_community_route(
     )
     
 
-@router.get("/{user_id}", status_code=status.HTTP_200_OK)
+@router.get("/{user_id}", status_code=status.HTTP_200_OK, response_model=list[DisplayCommunitySchema])
 def get_user_communities_route(
     db: Session = Depends(get_db),
     current_user_token: str = Depends(oauth)
