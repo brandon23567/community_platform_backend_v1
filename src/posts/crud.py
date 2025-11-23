@@ -1,9 +1,8 @@
 from .models import *
 from .schemas import *
 from fastapi import HTTPException, status, UploadFile, Form, File
-from sqlalchemy import select, and_, or_ 
+from sqlalchemy import select, and_ 
 from sqlalchemy.orm  import Session
-from ..authentication.routes import oauth 
 from ..authentication.jwt_handeler import *
 import os 
 import cloudinary
