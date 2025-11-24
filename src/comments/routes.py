@@ -5,6 +5,7 @@ from ..authentication.routes import oauth
 from fastapi import APIRouter, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 from ..database import get_db
+from ..authentication.jwt_handeler import *
 
 router = APIRouter(
     prefix="/community_comments",
