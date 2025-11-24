@@ -10,7 +10,7 @@ class CommunityPostModel(Base):
     
     id = Column(String, primary_key=True, index=True, default=lambda: uuid4().hex)
     associated_user_id = Column(String, ForeignKey("users.id"), nullable=False)
-    associated_community_id = Column(String, ForeignKey("CommunityModel"), nullable=False)
+    associated_community_id = Column(String, ForeignKey("communities.id"), nullable=False)
     post_body = Column(Text, nullable=False)
     post_header_image = Column(String, nullable=True)
     date_posted = Column(DateTime, default=lambda: datetime.now(timezone.utc))

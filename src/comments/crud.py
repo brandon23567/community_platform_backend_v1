@@ -1,7 +1,6 @@
 from .schemas import *
 from .models import *
 from ..authentication.models import * 
-from ..authentication.routes import *
 from ..community.models import *
 from ..posts.models import *
 from fastapi import HTTPException, status
@@ -55,7 +54,7 @@ def upload_new_comment(
 def edit_post_comment(
     user_id: str,
     community_id: str,
-    post_id: str,
+    comment_id: str,
     comment_data: EditComminityPostCommentSchema,
     db: Session
 ):
@@ -77,7 +76,7 @@ def edit_post_comment(
             and_(
                 CommunityPostCommentModel.associated_community_id == community_id,
                 CommunityPostCommentModel.associated_user_id == user_id,
-                CommunityPostCommentModel.associated_post_id == post_id
+                CommunityPostCommentModel.id == comment_id
             )
         )).scalar_one_or_none()
         
@@ -106,7 +105,7 @@ def edit_post_comment(
 def delete_community_post_comment(
     user_id: str,
     community_id: str,
-    post_id: str,
+    comment_id: str,
     db: Session
 ):
     try:
@@ -126,7 +125,7 @@ def delete_community_post_comment(
         comment_instance_to_delete = db.execute(select(CommunityPostCommentModel).where(
             and_(
                 CommunityPostCommentModel.associated_community_id == community_id,
-                CommunityPostCommentModel.associated_post_id == post_id,
+                CommunityPostCommentModel.id == comment_id,
                 CommunityPostCommentModel.associated_user_id == user_id
             )
         )).scalar_one_or_none()

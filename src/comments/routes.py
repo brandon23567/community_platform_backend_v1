@@ -11,7 +11,7 @@ router = APIRouter(
     tags=["Community Comments Endpoint"]
 )
 
-@router.post("/{community_id}/post/{post_id}}", status_code=status.HTTP_201_CREATED)
+@router.post("/{community_id}/post/{post_id}", status_code=status.HTTP_201_CREATED)
 def create_new_community_post_comment_route(
     community_id: str,
     post_id: str,
@@ -37,10 +37,10 @@ def create_new_community_post_comment_route(
         db=db
     )
     
-@router.put("{community_id}/edit_comment/{post_id}", status_code=status.HTTP_200_OK)
+@router.put("/{community_id}/edit_comment/{comment_id}", status_code=status.HTTP_200_OK)
 def edit_community_post_comment_route(
     community_id: str,
-    post_id: str,
+    comment_id: str,
     comment_data: CreateCommunityPostCommentSchema,
     db: Session = Depends(get_db),
     current_user_token: str = Depends(oauth)
@@ -58,15 +58,15 @@ def edit_community_post_comment_route(
     return edit_post_comment(
         user_id=user_id,
         community_id=community_id,
-        post_id=post_id,
+        comment_id=comment_id,
         comment_data=comment_data,
         db=db
     )
     
-@router.delete("/{community_id}/{post_id}")
+@router.delete("/{community_id}/{comment_id}")
 def delete_comunity_post_comment(
     community_id: str,
-    post_id: str,
+    comment_id: str,
     db: Session = Depends(get_db),
     current_user_token: str = Depends(oauth)
 ):
@@ -83,6 +83,6 @@ def delete_comunity_post_comment(
     return delete_community_post_comment(
         user_id=user_id,
         community_id=community_id,
-        post_id=post_id,
+        comment_id=comment_id,
         db=db
     )
